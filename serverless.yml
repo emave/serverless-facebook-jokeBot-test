@@ -1,0 +1,25 @@
+service: jokebot
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+  stage: dev
+  region: eu-central-1
+
+  environment:
+    VERIFY_TOKEN: 'areallylongtoken'
+    ACCESS_TOKEN: 'nothinginterestinghere'
+
+functions:
+  webhook:
+    handler: handler.webhook
+    events:
+      - http:
+          path: webhook
+          method: GET
+          integration: lambda
+      - http:
+          path: webhook
+          method: POST
+          integration: lambda
